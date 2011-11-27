@@ -33,24 +33,17 @@ PRODUCT_PACKAGES += \
     librs_jni \
     sensors.desirec \
     lights.desirec \
-    gralloc.msm7k \
+    lights.msm7k \
     copybit.msm7k \
+    audio_primary.msm7k \
+    audio_policy.msm7k \
     gps.desirec \
     wlan_loader \
     tiwlan.ini \
     dhcpcd.conf \
     VoiceDialer \
-    libOmxCore \
-    libOmxVidEnc \
-    libmm-omxcore \
-    desirec-keypad.kcm
-
-# Live Wallpapers
-PRODUCT_PACKAGES += \
-    LiveWallpapers \
-    LiveWallpapersPicker \
-    VisualizationWallpapers \
-    librs_jni
+    desirec-keypad.kcm \
+    com.android.future.usb.accessory
 
 # Install the features available on this device.
 PRODUCT_COPY_FILES += \
@@ -72,8 +65,7 @@ PRODUCT_COPY_FILES += \
     device/htc/desirec/synaptics-rmi-touchscreen.idc:system/usr/idc/synaptics-rmi-touchscreen.idc
 
 PRODUCT_COPY_FILES += \
-    device/htc/desirec/init.desirec.rc:root/init.desirec.rc \
-    device/htc/desirec/ueventd.desirec.rc:root/ueventd.desirec.rc
+    device/htc/desirec/init.desirec.rc:root/init.desirec.rc
 
 # Keylayouts
 PRODUCT_COPY_FILES += \
@@ -136,5 +128,8 @@ PRODUCT_COPY_FILES += \
     device/htc/desirec/modules/wlan.ko:system/lib/modules/$(KERNEL_NAME)/drivers/net/wireless/tiwlan1251/wlan.ko \
     device/htc/desirec/modules/hid-dummy.ko:system/lib/modules/$(KERNEL_NAME)/drivers/hid/hid-dummy.ko \
     device/htc/desirec/modules/wlan.ko:system/lib/modules/wlan.ko
+
+# stuff common to all HTC phones
+$(call inherit-product, device/htc/common/common.mk)
 
 $(call inherit-product-if-exists, vendor/htc/desirec/device-vendor.mk)
