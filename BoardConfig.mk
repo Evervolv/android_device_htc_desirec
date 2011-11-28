@@ -14,6 +14,9 @@
 # limitations under the License.
 #
 
+# Allow compatibility with old touchscreens
+BOARD_USE_LEGACY_TOUCHSCREEN := true
+
 # This variable is set first, so it can be overridden
 # by BoardConfigVendor.mk
 USE_CAMERA_STUB := true
