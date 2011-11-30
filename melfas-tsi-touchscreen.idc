@@ -13,7 +13,7 @@
 # limitations under the License.
 
 #
-# Synaptics touchscreen configuration file
+# Melfas touchscreen configuration file
 #
 
 touch.deviceType = touchScreen
