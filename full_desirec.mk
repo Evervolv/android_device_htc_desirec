@@ -1,4 +1,5 @@
-# Copyright (C) 2011 The Android Open Source Project
+#
+# Copyright (C) 2009 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,33 +12,149 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-#
-# This file is the build configuration for a full Android
-# build for maguro hardware. This cleanly combines a set of
-# device-specific aspects (drivers) with a device-agnostic
-# product configuration (apps). Except for a few implementation
-# details, it only fundamentally contains two inherit-product
-# lines, full and maguro, hence its name.
 #
 
-# Get the long list of APNs
-PRODUCT_COPY_FILES := device/sample/etc/apns-full-conf.xml:system/etc/apns-conf.xml
+#
+# This is the product configuration for a generic incredible,
+# not specialized for any geography.
+#
 
-# Camera
-PRODUCT_PACKAGES := \
-    Camera
+# The gps config appropriate for this device
+$(call inherit-product, device/common/gps/gps_us.mk)
 
-# Inherit from those products. Most specific first.
+PRODUCT_COPY_FILES += \
+    device/htc/desirec/prebuilt/root/init.desirec.rc:root/init.desirec.rc \
+    device/htc/desirec/prebuilt/root/ueventd.desirec.rc:root/ueventd.desirec.rc
+
+DEVICE_PACKAGE_OVERLAYS := device/htc/desirec/overlay
+
+PRODUCT_COPY_FILES += \
+    device/htc/desirec/prebuilt/etc/vold.fstab:system/etc/vold.fstab \
+    device/htc/desirec/prebuilt/etc/apns-conf.xml:system/etc/apns-conf.xml \
+    device/htc/desirec/prebuilt/etc/media_profiles.xml:/system/etc/media_profiles.xml
+
+PRODUCT_PACKAGES += \
+    librs_jni \
+    sensors.desirec \
+    lights.desirec \
+    lights.msm7k \
+    audio.primary.desirec \
+    audio_policy.desirec \
+    gps.desirec \
+    wlan_loader \
+    tiwlan.ini \
+    dhcpcd.conf \
+    libOmxCore \
+    libmm-omxcore \
+    com.android.future.usb.accessory
+
+# Install the features available on this device.
+PRODUCT_COPY_FILES += \
+    frameworks/base/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
+    frameworks/base/data/etc/android.hardware.camera.autofocus.xml:system/etc/permissions/android.hardware.camera.autofocus.xml \
+    frameworks/base/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml \
+    frameworks/base/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
+    frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
+    frameworks/base/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
+    frameworks/base/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml \
+    frameworks/base/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
+    frameworks/base/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
+    frameworks/base/data/etc/android.hardware.touchscreen.multitouch.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.xml \
+    frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml
+
+# Touchscreen
+PRODUCT_COPY_FILES += \
+    device/htc/desirec/prebuilt/usr/idc/synaptics-rmi-touchscreen.idc:system/usr/idc/synaptics-rmi-touchscreen.idc \
+    device/htc/desirec/prebuilt/usr/idc/melfas-tsi-touchscreen.idc:system/usr/idc/melfas-tsi-touchscreen.idc \
+    device/htc/desirec/prebuilt/usr/idc/desirec-nav.idc:system/usr/idc/desirec-nav.idc
+
+PRODUCT_COPY_FILES += \
+    device/htc/desirec/prebuilt/root/init.desirec.rc:root/init.desirec.rc
+
+# Keylayouts
+PRODUCT_COPY_FILES += \
+    device/htc/desirec/prebuilt/usr/keylayout/desirec-keypad.kl:system/usr/keylayout/desirec-keypad.kl \
+    device/htc/desirec/prebuilt/usr/keylayout/h2w_headset.kl:system/usr/keylayout/h2w_headset.kl
+
+# Keymap
+PRODUCT_COPY_FILES += \
+    device/htc/desirec/prebuilt/usr/keychars/desirec-keypad.kcm:system/usr/keychars/desirec-keypad.kcm
+
+#Disable HWAccel for now
+ADDITIONAL_BUILD_PROPERTIES += \
+    ro.config.disable_hw_accel=true
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    rild.libpath=/system/lib/libhtc_ril.so \
+    ro.ril.def.agps.mode=2 \
+    wifi.interface=tiwlan0 \
+    wifi.supplicant_scan_interval=45
+
+# density in DPI of the LCD of this board. This is used to scale the UI
+# appropriately. If this property is not defined, the default value is 160 dpi. 
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.sf.lcd_density=160
+
+# Performences tweaks
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.execution-mode=int:fast \
+    dalvik.vm.checkjni=false \
+    dalvik.vm.heapsize=32m \
+    ro.compcache.default=0 \
+    persist.sys.use_dithering=0 \
+    persist.sys.purgeable_assets=1
+
+# OpenGL ES 1.1-CM
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.opengles.version = 65537
+
+# Default network type
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.telephony.default_network=4 \
+    ro.com.google.clientidbase=android-verizon-us \
+    ro.com.google.locationfeatures=1 \
+    ro.cdma.home.operator.alpha=Verizon \
+    ro.cdma.home.operator.numeric=310012 \
+    ro.cdma.homesystem=128,64 \
+    ro.cdma.data_retry_config=default_randomization=960000,960000,960000,960000,960000
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.setupwizard.mode=OPTIONAL \
+    ro.setupwizard.enable_bypass=1 \
+    dalvik.vm.dexopt-flags=m=y
+
+PRODUCT_LOCALES += en
+
+# DesireC uses medium-density artwork where available
+PRODUCT_AAPT_CONFIG := normal mdpi
+PRODUCT_AAPT_PREF_CONFIG := mdpi
+
+# Kernel Targets
+ifeq ($(TARGET_PREBUILT_KERNEL),)
+	LOCAL_KERNEL := device/htc/desirec/prebuilt/root/kernel
+else
+	LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
+endif
+PRODUCT_COPY_FILES += \
+    $(LOCAL_KERNEL):kernel
+
+KERNEL_NAME := 2.6.29-DecaFuctCFS-dirty-9ff84b92
+
+PRODUCT_COPY_FILES += \
+    device/htc/desirec/prebuilt/lib/modules/modules.dep.bb:system/lib/modules/$(KERNEL_NAME)/modules.dep.bb \
+    device/htc/desirec/prebuilt/lib/modules/modules.order:system/lib/modules/$(KERNEL_NAME)/modules.order \
+    device/htc/desirec/prebuilt/lib/modules/wlan.ko:system/lib/modules/$(KERNEL_NAME)/drivers/net/wireless/tiwlan1251/wlan.ko \
+    device/htc/desirec/prebuilt/lib/modules/hid-dummy.ko:system/lib/modules/$(KERNEL_NAME)/drivers/hid/hid-dummy.ko \
+    device/htc/desirec/prebuilt/lib/modules/wlan.ko:system/lib/modules/wlan.ko
+
+$(call inherit-product-if-exists, vendor/htc/desirec/desirec-vendor.mk)
+
+# stuff common to all HTC phones
+$(call inherit-product, device/htc/common/common.mk)
+
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
-# This is where we'd set a backup provider if we had one
-#$(call inherit-product, device/sample/products/backup_overlay.mk)
-# Inherit from maguro device
-$(call inherit-product, device/htc/desirec/device.mk)
 
-# Set those variables here to overwrite the inherited values.
+
 PRODUCT_NAME := full_desirec
 PRODUCT_DEVICE := desirec
-PRODUCT_BRAND := Verizon
-PRODUCT_MODEL := Full AOSP on Eris
-PRODUCT_MANUFACTURER := HTC
+PRODUCT_MODEL := Full Android on DesireC

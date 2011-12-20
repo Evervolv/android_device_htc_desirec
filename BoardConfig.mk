@@ -62,9 +62,9 @@ BOARD_AVOID_DRAW_TEXTURE_EXTENSION := true
 BOARD_USES_GENERIC_AUDIO := false
 
 # Use HTC USB Function Switch to enable tethering via USB
-BOARD_USE_HTC_USB_FUNCTION_SWITCH := true
+#BOARD_USE_HTC_USB_FUNCTION_SWITCH := true
 
-BOARD_USE_USB_MASS_STORAGE_SWITCH := true
+#BOARD_USE_USB_MASS_STORAGE_SWITCH := true
 
 BOARD_HAVE_BLUETOOTH := true
 
@@ -77,7 +77,7 @@ BOARD_USES_QCOM_HARDWARE := true
 TARGET_HARDWARE_3D := false
 
 # OpenGL drivers config file path
-BOARD_EGL_CFG := device/htc/desirec/egl.cfg
+BOARD_EGL_CFG := device/htc/desirec/prebuilt/lib/egl/egl.cfg
 
 BOARD_USE_HTC_LIBSENSORS := true
 BOARD_USE_desirec_LIBSENSORS := true
@@ -118,7 +118,7 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x01920000
 # The size of a block that can be marked bad.
 BOARD_FLASH_BLOCK_SIZE := 131072
 
-TARGET_PREBUILT_KERNEL := device/htc/desirec/kernel
+TARGET_PREBUILT_KERNEL := device/htc/desirec/prebuilt/root/kernel
 
 PRODUCT_SPECIFIC_DEFINES += TARGET_PRELINKER_MAP=\$(TOP)/device/htc/desirec/prelink-linux-arm-desirec.map
 
