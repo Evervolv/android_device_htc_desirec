@@ -14,15 +14,19 @@
 # limitations under the License.
 #
 
-# Allow compatibility with old touchscreens
+# Allow compatibility with old touchscreens in ICS
 BOARD_USE_LEGACY_TOUCHSCREEN := true
+
+# Allow compatibility with old trackpads in ICS
+BOARD_USE_LEGACY_TRACKPAD := true
 
 # This variable is set first, so it can be overridden
 # by BoardConfigVendor.mk
-USE_CAMERA_STUB := true
+#ICS USE_CAMERA_STUB := true
+USE_CAMERA_STUB := false
 
 # Fake building with eclair cam
-BOARD_USES_ECLAIR_LIBCAMERA := true
+#ICS BOARD_USES_ECLAIR_LIBCAMERA := true
 
 # Use the non-open-source parts, if they're present
 -include vendor/htc/desirec/BoardConfigVendor.mk
@@ -56,10 +60,8 @@ WIFI_DRIVER_FW_AP_PATH      := "/etc/wifi/Fw1251r1c.bin"
 BOARD_KERNEL_CMDLINE := no_console_suspend=1 console=null
 BOARD_KERNEL_BASE := 0x11200000
 
-#libsurfaceflinger to avoid Draw Texture Extenstion
-BOARD_AVOID_DRAW_TEXTURE_EXTENSION := true
-
 BOARD_USES_GENERIC_AUDIO := false
+#ICS BOARD_USES_AUDIO_LEGACY := true
 
 # Use HTC USB Function Switch to enable tethering via USB
 #BOARD_USE_HTC_USB_FUNCTION_SWITCH := true
@@ -84,14 +86,13 @@ BOARD_USE_desirec_LIBSENSORS := true
 
 BOARD_USES_QCOM_LIBS := true
 
-BUILD_LIBCAMERA := true
-BOARD_CAMERA_LIBRARIES := libcameraservice libcamera
+COMMON_GLOBAL_CFLAGS += -DMISSING_EGL_EXTERNAL_IMAGE -DMISSING_EGL_PIXEL_FORMAT_YV12 -DMISSING_GRALLOC_BUFFERS
+
+#ICS BUILD_LIBCAMERA := true
+#ICS BOARD_CAMERA_LIBRARIES := libcameraservice libcamera
 
 BOARD_USES_GPSSHIM := true
-
 BOARD_GPS_NEEDS_XTRA := true
-
-TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
 
 BOARD_NO_RGBX_8888 := true
 

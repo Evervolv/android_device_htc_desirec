@@ -38,8 +38,10 @@ PRODUCT_PACKAGES += \
     sensors.desirec \
     lights.desirec \
     lights.msm7k \
+    audio.a2dp.default \
     audio.primary.desirec \
     audio_policy.desirec \
+    hwcomposer.default \
     gps.desirec \
     wlan_loader \
     tiwlan.ini \

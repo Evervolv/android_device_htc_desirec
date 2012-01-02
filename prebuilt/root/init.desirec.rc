@@ -127,6 +127,7 @@ service hciattach /system/bin/hciattach \
     user bluetooth
     group bluetooth net_bt_admin
     disabled
+    oneshot
 
 # bugreport is triggered by the KEY_BACK and KEY_MENU keycodes
 service bugreport /system/bin/dumpstate -d -v -o /sdcard/bugreports/bugreport
