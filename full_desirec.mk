@@ -24,6 +24,7 @@ $(call inherit-product, device/common/gps/gps_us.mk)
 
 PRODUCT_COPY_FILES += \
     device/htc/desirec/prebuilt/root/init.desirec.rc:root/init.desirec.rc \
+    device/htc/desirec/prebuilt/root/init.desirec.usb.rc:root/init.desirec.usb.rc \
     device/htc/desirec/prebuilt/root/ueventd.desirec.rc:root/ueventd.desirec.rc
 
 DEVICE_PACKAGE_OVERLAYS := device/htc/desirec/overlay
@@ -82,9 +83,13 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/htc/desirec/prebuilt/usr/keychars/desirec-keypad.kcm:system/usr/keychars/desirec-keypad.kcm
 
-#Disable HWAccel for now
+# Disable HWAccel for now
 ADDITIONAL_BUILD_PROPERTIES += \
     ro.config.disable_hw_accel=true
+
+# USB mass storage
+ADDITIONAL_DEFAULT_PROPERTIES += \
+    persist.sys.usb.config=mass_storage
 
 PRODUCT_PROPERTY_OVERRIDES += \
     rild.libpath=/system/lib/libhtc_ril.so \

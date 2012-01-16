@@ -30,6 +30,8 @@ on boot
     setkey 0xc0 0x8b 0x707
     setkey 0xc0 0x6b 0x20c
 
+import init.desirec.usb.rc
+
 on fs
     # bluetooth power up/down interface
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
@@ -37,6 +39,12 @@ on fs
     chmod 0660                /sys/class/rfkill/rfkill0/state
     chown bluetooth bluetooth /dev/ttyHS0
     chmod 0770                /dev/ttyHS0
+
+    # Camera
+    chmod 0666 /dev/msm_camera/config0
+    chmod 0666 /dev/msm_camera/control0
+    chmod 0666 /dev/msm_camera/frame0
+    chmod 0666 /dev/graphics/fb0
 
     # Permissions for Liblights.
     chown system system /sys/class/leds/green/brightness
