@@ -12,6 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import init.desirec.usb.rc
+
+on early-init
+    export EXTERNAL_STORAGE /mnt/sdcard
+    mkdir /mnt/sdcard 0000 system system
+    # for backwards compatibility
+    symlink /mnt/sdcard /sdcard
+
 on boot
     # unmap left alt to avoid console switch
     setkey 0x0 0x38 0x0
@@ -29,8 +37,6 @@ on boot
     setkey 0xc0 0xe7 0x706
     setkey 0xc0 0x8b 0x707
     setkey 0xc0 0x6b 0x20c
-
-import init.desirec.usb.rc
 
 on fs
     # bluetooth power up/down interface
