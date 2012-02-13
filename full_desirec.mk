@@ -34,22 +34,29 @@ PRODUCT_COPY_FILES += \
     device/htc/desirec/prebuilt/etc/apns-conf.xml:system/etc/apns-conf.xml \
     device/htc/desirec/prebuilt/etc/media_profiles.xml:/system/etc/media_profiles.xml
 
+# Prebuilt libcamera for HAL
+PRODUCT_COPY_FILES += \
+    device/htc/desirec/prebuilt/lib/libcamera.so:obj/lib/libcamera.so \
+    device/htc/desirec/prebuilt/lib/libcamera.so:system/lib/libcamera.so
+
 PRODUCT_PACKAGES += \
     librs_jni \
     sensors.desirec \
     lights.desirec \
     lights.msm7k \
+    camera.msm7k \
     audio.a2dp.default \
     audio.primary.desirec \
     audio_policy.desirec \
-    hwcomposer.default \
     gps.desirec \
     wlan_loader \
     tiwlan.ini \
     dhcpcd.conf \
-    libOmxCore \
-    libmm-omxcore \
     com.android.future.usb.accessory
+#    gralloc.desirec \
+#    libstagefrighthw \
+#    libOmxCore \
+#    libmm-omxcore \
 
 # Install the features available on this device.
 PRODUCT_COPY_FILES += \

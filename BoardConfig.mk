@@ -22,17 +22,15 @@ BOARD_USE_LEGACY_TRACKPAD := true
 
 # This variable is set first, so it can be overridden
 # by BoardConfigVendor.mk
-#ICS USE_CAMERA_STUB := true
-USE_CAMERA_STUB := false
-
-# Fake building with eclair cam
-#ICS BOARD_USES_ECLAIR_LIBCAMERA := true
+USE_CAMERA_STUB := true
 
 # Use the non-open-source parts, if they're present
 -include vendor/htc/desirec/BoardConfigVendor.mk
 
 TARGET_BOARD_PLATFORM := msm7k
 TARGET_BOARD_PLATFORM_GPU := qcom
+
+TARGET_FORCE_CPU_UPLOAD := true
 
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
@@ -63,11 +61,6 @@ BOARD_KERNEL_BASE := 0x11200000
 BOARD_USES_GENERIC_AUDIO := false
 #ICS BOARD_USES_AUDIO_LEGACY := true
 
-# Use HTC USB Function Switch to enable tethering via USB
-#BOARD_USE_HTC_USB_FUNCTION_SWITCH := true
-
-#BOARD_USE_USB_MASS_STORAGE_SWITCH := true
-
 BOARD_HAVE_BLUETOOTH := true
 
 BOARD_VENDOR_USE_AKMD := akm8973
@@ -92,9 +85,6 @@ BOARD_USES_LEGACY_QCOM := true
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/usb_mass_storage/lun0/file
 
 COMMON_GLOBAL_CFLAGS += -DMISSING_EGL_EXTERNAL_IMAGE -DMISSING_EGL_PIXEL_FORMAT_YV12 -DMISSING_GRALLOC_BUFFERS
-
-#ICS BUILD_LIBCAMERA := true
-#ICS BOARD_CAMERA_LIBRARIES := libcameraservice libcamera
 
 BOARD_USES_GPSSHIM := true
 BOARD_GPS_NEEDS_XTRA := true
