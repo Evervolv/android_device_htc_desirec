@@ -12,20 +12,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# We need a way to prevent the stuff Google Apps replaces from being included in the build.
-# This is a hacky way to do that.
+ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),desirec)
 
+LOCAL_PATH := $(call my-dir)
+
+# HAL module implemenation stored in
+# hw/<OVERLAY_HARDWARE_MODULE_ID>.<ro.product.board>.so
+include $(CLEAR_VARS)
+
+LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw
+LOCAL_SHARED_LIBRARIES := liblog libcutils
+
+LOCAL_SRC_FILES := 	\
+	allocator.cpp 	\
+	gralloc.cpp 	\
+	framebuffer.cpp \
+	mapper.cpp
+	
+LOCAL_MODULE := gralloc.desirec
 LOCAL_MODULE_TAGS := optional
+LOCAL_CFLAGS:= -DLOG_TAG=\"gralloc.$(TARGET_BOOTLOADER_BOARD_NAME)\"
+include $(BUILD_SHARED_LIBRARY)
 
-LOCAL_PATH := $(my-dir)
-subdir_makefiles := \
-	$(LOCAL_PATH)/libaudio/Android.mk \
-	$(LOCAL_PATH)/libgralloc/Android.mk \
-	$(LOCAL_PATH)/liblights/Android.mk \
-	$(LOCAL_PATH)/librpc/Android.mk \
-	$(LOCAL_PATH)/libsensors/Android.mk \
-	$(LOCAL_PATH)/libstagefrighthw/Android.mk \
-	$(LOCAL_PATH)/libomxcore/Android.mk \
-	$(LOCAL_PATH)/recovery/Android.mk
-
-include $(subdir_makefiles)
+endif

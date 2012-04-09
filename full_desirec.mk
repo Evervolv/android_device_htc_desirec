@@ -44,19 +44,19 @@ PRODUCT_PACKAGES += \
     sensors.desirec \
     lights.desirec \
     lights.msm7k \
-    camera.msm7k \
     audio.a2dp.default \
     audio.primary.desirec \
     audio_policy.desirec \
+    gralloc.desirec \
     gps.desirec \
+    camera.msm7k \
     wlan_loader \
     tiwlan.ini \
     dhcpcd.conf \
+    libstagefrighthw \
+    libOmxCore \
+    libmm-omxcore \
     com.android.future.usb.accessory
-#    gralloc.desirec \
-#    libstagefrighthw \
-#    libOmxCore \
-#    libmm-omxcore \
 
 # Install the features available on this device.
 PRODUCT_COPY_FILES += \

@@ -67,7 +67,9 @@ BOARD_VENDOR_USE_AKMD := akm8973
 
 BOARD_VENDOR_QCOM_AMSS_VERSION := 4410
 
-BOARD_USES_QCOM_HARDWARE := true
+#BOARD_USES_QCOM_HARDWARE := true
+#BOARD_USES_QCOM_LIBS := true
+#BOARD_USES_LEGACY_QCOM := true
 
 TARGET_HARDWARE_3D := false
 
@@ -76,10 +78,6 @@ BOARD_EGL_CFG := device/htc/desirec/prebuilt/lib/egl/egl.cfg
 
 BOARD_USE_HTC_LIBSENSORS := true
 BOARD_USE_desirec_LIBSENSORS := true
-
-BOARD_USES_QCOM_LIBS := true
-
-BOARD_USES_LEGACY_QCOM := true
 
 #USB mass storage
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/usb_mass_storage/lun0/file
