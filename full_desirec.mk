@@ -69,8 +69,8 @@ PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml \
     frameworks/base/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
     frameworks/base/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
-    frameworks/base/data/etc/android.hardware.touchscreen.multitouch.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.xml \
-    frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml
+    frameworks/base/data/etc/android.hardware.touchscreen.multitouch.distinct.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.distinct.xml \
+    frameworks/base/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml
 
 # Touchscreen
 PRODUCT_COPY_FILES += \
@@ -90,6 +90,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/htc/desirec/prebuilt/usr/keychars/desirec-keypad.kcm:system/usr/keychars/desirec-keypad.kcm
 
+# Undead call fix
+PRODUCT_COPY_FILES += \
+    device/htc/desirec/prebuilt/xbin/dmportread.sh:system/xbin/dmportread.sh
+
 # Disable HWAccel for now
 ADDITIONAL_BUILD_PROPERTIES += \
     ro.config.disable_hw_accel=true
@@ -97,6 +101,13 @@ ADDITIONAL_BUILD_PROPERTIES += \
 # USB mass storage
 ADDITIONAL_DEFAULT_PROPERTIES += \
     persist.sys.usb.config=mass_storage
+
+# ADB access
+ADDITIONAL_DEFAULT_PROPERTIES += \
+    persist.service.adb.enable=1
+
+# Set dirty_ratio for UMS
+PRODUCT_PROPERTY_OVERRIDES += ro.vold.umsdirtyratio=20
 
 PRODUCT_PROPERTY_OVERRIDES += \
     rild.libpath=/system/lib/libhtc_ril.so \
@@ -111,9 +122,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Performences tweaks
 PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.execution-mode=int:fast \
     dalvik.vm.checkjni=false \
-    dalvik.vm.heapsize=32m \
+    dalvik.vm.dexopt-flags=m=y \
+    dalvik.vm.execution-mode=int:fast \
+    dalvik.vm.heapstartsize=5m \
+    dalvik.vm.heapgrowthlimit=32m \
+    dalvik.vm.heapsize=64m \
     ro.compcache.default=0 \
     persist.sys.use_dithering=0 \
     persist.sys.purgeable_assets=1
@@ -121,6 +135,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # OpenGL ES 1.1-CM
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version = 65537
+
+# sysctl parameters
+PRODUCT_COPY_FILES += \
+    device/htc/desirec/prebuilt/etc/sysctl.conf:system/etc/sysctl.conf
 
 # Default network type
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -134,8 +152,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.setupwizard.mode=OPTIONAL \
-    ro.setupwizard.enable_bypass=1 \
-    dalvik.vm.dexopt-flags=m=y
+    ro.setupwizard.enable_bypass=1
 
 PRODUCT_LOCALES += en
 
@@ -166,7 +183,7 @@ $(call inherit-product-if-exists, vendor/htc/desirec/desirec-vendor.mk)
 # stuff common to all HTC phones
 $(call inherit-product, device/htc/common/common.mk)
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/small_base_telephony.mk)
 
 
 PRODUCT_NAME := full_desirec
