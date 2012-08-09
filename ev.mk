@@ -21,7 +21,7 @@ PRODUCT_VERSION_DEVICE_SPECIFIC := b1
 PRODUCT_MOTD :="\n\n\n------------MESSAGE------------\nThank you for choosing Evervolv\n for your HTC Droid Eris!\n\nPlease visit us at:\n \#evervolv on irc.freenode.net\n\nFollow @preludedrew on twitter\n for the latest Evervolv updates\n\nGet the latest rom at:\n http://www.evervolv.com\n--------------------------------\n"
 
 PRODUCT_PACKAGES += \
-    Camera
+    LegacyCamera
 
 # Gallery2 replacement - QuickPic
 PRODUCT_COPY_FILES +=  \
