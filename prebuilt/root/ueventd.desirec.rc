@@ -1,2 +1,4 @@
 mtd@misc 0460 radio diag
 
+# wifi
+/dev/rfkill             0660    root        wifi
