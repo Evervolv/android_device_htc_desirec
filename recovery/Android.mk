@@ -13,8 +13,7 @@
 # limitations under the License.
 
 
-ifneq ($(TARGET_SIMULATOR),true)
-ifeq ($(TARGET_ARCH),arm)
+ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),desirec)
 
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
@@ -29,5 +28,4 @@ LOCAL_MODULE := librecovery_ui_desirec
 
 include $(BUILD_STATIC_LIBRARY)
 
-endif   # TARGET_ARCH == arm
 endif   # !TARGET_SIMULATOR
