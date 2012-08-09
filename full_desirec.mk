@@ -180,9 +180,6 @@ PRODUCT_COPY_FILES += \
 
 $(call inherit-product-if-exists, vendor/htc/desirec/desirec-vendor.mk)
 
-# stuff common to all HTC phones
-$(call inherit-product, device/htc/common/common.mk)
-
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 
