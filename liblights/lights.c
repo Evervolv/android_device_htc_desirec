@@ -75,7 +75,7 @@ static int write_int (const char* path, int value) {
 	fd = open(path, O_RDWR);
 	if (fd < 0) {
 		if (already_warned == 0) {
-			LOGV("write_int failed to open %s\n", path);
+			ALOGV("write_int failed to open %s\n", path);
 			already_warned = 1;
 		}
 		return -errno;
@@ -261,7 +261,7 @@ handle_trackball_light_locked(struct light_device_t* dev)
     if (mode == 7 && g_backlight) {
         mode = 0;
     }
-    LOGV("%s g_backlight = %d, mode = %d, g_attention = %d\n",
+    ALOGV("%s g_backlight = %d, mode = %d, g_attention = %d\n",
         __func__, g_backlight, mode, g_attention);
     // If the value isn't changing, don't set it, because this
     // can reset the timer on the breathing mode, which looks bad.
@@ -284,7 +284,7 @@ static int set_light_backlight(struct light_device_t* dev,
 		struct light_state_t const* state) {
 	int err = 0;
 	int brightness = rgb_to_brightness(state);
-	LOGV("%s brightness=%d color=0x%08x",
+	ALOGV("%s brightness=%d color=0x%08x",
 		__func__,brightness, state->color);
 	pthread_mutex_lock(&g_lock);
 	g_backlight = brightness;
@@ -317,7 +317,7 @@ set_light_attention(struct light_device_t* dev,
         struct light_state_t const* state)
 {
     pthread_mutex_lock(&g_lock);
-    LOGV("set_light_attention g_trackball=%d color=0x%08x",
+    ALOGV("set_light_attention g_trackball=%d color=0x%08x",
             g_trackball, state->color);
     if (state->flashMode == LIGHT_FLASH_HARDWARE) {
         g_attention = state->flashOnMS;
