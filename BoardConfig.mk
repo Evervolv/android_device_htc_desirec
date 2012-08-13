@@ -14,10 +14,10 @@
 # limitations under the License.
 #
 
-# Allow compatibility with old touchscreens in ICS
+# Allow compatibility with old touchscreens
 BOARD_USE_LEGACY_TOUCHSCREEN := true
 
-# Allow compatibility with old trackpads in ICS
+# Allow compatibility with old trackpads
 BOARD_USE_LEGACY_TRACKPAD := true
 
 # This variable is set first, so it can be overridden
@@ -82,6 +82,9 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/usb_mass_storage/lun0/f
 COMMON_GLOBAL_CFLAGS += -DMISSING_EGL_EXTERNAL_IMAGE -DMISSING_EGL_PIXEL_FORMAT_YV12 -DMISSING_GRALLOC_BUFFERS
 
 COMMON_GLOBAL_CFLAGS += -DBINDER_COMPAT
+
+# Legacy ril
+COMMON_GLOBAL_CFLAGS += -DRIL_VERSION_2_SUPPORT
 
 BOARD_USES_GPSSHIM := true
 BOARD_GPS_NEEDS_XTRA := true
