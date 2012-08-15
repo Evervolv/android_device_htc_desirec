@@ -32,7 +32,9 @@ DEVICE_PACKAGE_OVERLAYS := device/htc/desirec/overlay
 PRODUCT_COPY_FILES += \
     device/htc/desirec/prebuilt/etc/vold.fstab:system/etc/vold.fstab \
     device/htc/desirec/prebuilt/etc/apns-conf.xml:system/etc/apns-conf.xml \
-    device/htc/desirec/prebuilt/etc/media_profiles.xml:/system/etc/media_profiles.xml
+    device/htc/desirec/prebuilt/etc/media_profiles.xml:/system/etc/media_profiles.xml \
+    device/htc/desirec/prebuilt/etc/media_codecs.xml:/system/etc/media_codecs.xml \
+    device/htc/desirec/prebuilt/etc/audio_policy.conf:/system/etc/audio_policy.conf
 
 # Prebuilt libcamera for HAL
 PRODUCT_COPY_FILES += \
@@ -44,6 +46,7 @@ PRODUCT_PACKAGES += \
     sensors.desirec \
     lights.desirec \
     lights.msm7k \
+    audio.usb.default \
     audio.a2dp.default \
     audio.primary.desirec \
     audio_policy.desirec \
