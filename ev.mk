@@ -2,7 +2,7 @@
 $(call inherit-product, device/htc/desirec/full_desirec.mk)
 
 # Inherit some common evervolv stuff.
-$(call inherit-product, vendor/ev/config/common_full_phone.mk)
+$(call inherit-product, vendor/ev/config/common_small_phone.mk)
 
 #
 # Setup device specific product configuration.

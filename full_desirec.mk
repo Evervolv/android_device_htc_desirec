@@ -183,7 +183,7 @@ PRODUCT_COPY_FILES += \
 
 $(call inherit-product-if-exists, vendor/htc/desirec/desirec-vendor.mk)
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/small_base_telephony.mk)
 
 
 PRODUCT_NAME := full_desirec
