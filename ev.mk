@@ -26,7 +26,7 @@ PRODUCT_PACKAGES += \
 # Gallery2 replacement - QuickPic
 PRODUCT_COPY_FILES +=  \
     device/htc/desirec/prebuilt/app/QuickPic.apk:system/app/Gallery2.apk \
-    device/htc/desirec/prebuilt/lib/libqpicjni86.so:system/lib/libqpicjni86.so
+    device/htc/desirec/prebuilt/lib/libqpicjni86.so:system/lib/libqpicjni88.so
 
 # Hot reboot
 PRODUCT_PACKAGE_OVERLAYS += vendor/ev/overlay/hot_reboot
