@@ -61,6 +61,10 @@ PRODUCT_PACKAGES += \
     libmm-omxcore \
     com.android.future.usb.accessory
 
+# Filesystem management tools
+PRODUCT_PACKAGES += \
+    make_ext4fs
+
 # Install the features available on this device.
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
