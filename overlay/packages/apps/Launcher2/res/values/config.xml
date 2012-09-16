@@ -1,3 +1,4 @@
 <resources>
     <bool name="config_hardwareAccelerated">false</bool>
+    <bool name="adjust_cell_layout">true</bool>
 </resources>
